@@ -21,7 +21,7 @@ def record():
         img = img.crop(sizeX / 4, sizeY / 4, sizeX * 3 / 4, sizeY * 3 / 4)
         img.save(imageStr)
         os.system("python master.py")
-        input_state = GPIO.input(18)
+        input_state = GPIO.input(26)
         if input_state == False:
             break
     camera.stop_preview()
@@ -29,15 +29,16 @@ def record():
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(23, GPIO.OUT)
-GPIO.output(23, GPIO.LOW)
+GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(21, GPIO.OUT)
+GPIO.output(21, GPIO.LOW)
 while True:
-    input_state = GPIO.input(18)
+    input_state = GPIO.input(26)
     if input_state == False:
-        GPIO.output(23, GPIO.HIGH)
+        GPIO.output(21, GPIO.HIGH)
         print("Button Pressed")
         record()
         break
 
 GPIO.cleanup()
+
