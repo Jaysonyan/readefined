@@ -6,14 +6,15 @@ import os
 def record():
     camera = PiCamera()
     camera.iso = 800
-    camera.zoom = (0.25, 0.25, 0.5, 0.5)
+    #camera.zoom = (0.25, 0.25, 0.5, 0.5)
     camera.start_preview()
     while True:
+	time.sleep(2)
         camera.capture("image.jpg")
-        input_state = GPIO.input(18)
+        os.system("python master.py")
+	input_state = GPIO.input(18)
         if input_state == False:
             break
-        time.sleep(0.1)
     camera.stop_preview()
 
 GPIO.setmode(GPIO.BCM)
@@ -29,7 +30,6 @@ while True:
                record()
                break
                
-os.system("python master.py")
 GPIO.cleanup()
 
 
