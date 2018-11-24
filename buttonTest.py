@@ -28,6 +28,8 @@ while True:
                print("Button Pressed")
                record()
                break
+               
+os.system("python master.py")
 GPIO.cleanup()
 
 
