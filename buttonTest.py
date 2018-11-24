@@ -2,6 +2,10 @@ import RPi.GPIO as GPIO
 from picamera import PiCamera
 import time
 import os
+from PIL import Image
+
+sizeX = 1000
+sizeY = 1000
 
 def record():
     camera = PiCamera()
@@ -11,6 +15,9 @@ def record():
     while True:
 	time.sleep(2)
         camera.capture("image.jpg")
+        img = Image.open("image.jpg")
+        img = img.crop(sizeX/4,sizeY/4,sizeX*3/4,sizeY*3/4)
+        crop.save("image.jpg")
         os.system("python master.py")
 	input_state = GPIO.input(18)
         if input_state == False:
