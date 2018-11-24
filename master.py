@@ -4,8 +4,8 @@ import subprocess
 from subprocess import Popen, PIPE
 import os
 
-centreX = 735/2
-centreY = 1102/2
+centreX = 2592/2
+centreY = 1944/2
 #process = subprocess.Popen(['../../google-cloud-sdk/bin/gcloud', 'ml', 'vision', 'detect-text', 'test.jpg'], stdout=subprocess.PIPE)
 process = subprocess.Popen(['gcloud', 'ml', 'vision', 'detect-text', 'image.jpg'], stdout=subprocess.PIPE)
 
