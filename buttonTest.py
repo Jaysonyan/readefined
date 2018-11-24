@@ -6,6 +6,7 @@ import time
 def record():
     camera = PiCamera()
     camera.iso = 800
+    camera.zoom = (0.25, 0.25, 0.5, 0.5)
     camera.start_preview()
     while True:
         camera.capture("image.jpg")
