@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 from picamera import PiCamera
 import time
-
+import os
 
 def record():
     camera = PiCamera()
