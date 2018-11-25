@@ -17,21 +17,6 @@ class callMasterThread (threading.Thread):
    def run(self):
       os.system("python master.py")
 
-class flashLEDThread (threading.Thread):
-   def __init__(self, threadID, name, counter):
-      threading.Thread.__init__(self)
-      self.threadID = threadID
-      self.name = name
-      self.counter = counter
-   def run(self):
-      ledOn = True
-      while threading.activeThreads() > 1 :
-          if ledOn:
-              GPIO.output(20, GPIO.LOW)
-          else:
-              GPIO.output(20, GPIO.HIGH)
-          ledOn = not ledOn
-
 def record():
     camera = PiCamera()
     camera.iso = 800
@@ -41,7 +26,6 @@ def record():
     led = myThread(2, "led-thread", 2)
 
     while True:
-        # time.sleep(2)
         camera.capture(imgStr)
         img = Image.open(imgStr)
         sizeX = img.size[0]
@@ -51,7 +35,14 @@ def record():
         img.save(imageStr)
 
         master.start()
-        led.start()
+        ledOn = True
+        while threading.activeThreads() > 0 :
+            if ledOn:
+                GPIO.output(20, GPIO.LOW)
+            else:
+                GPIO.output(20, GPIO.HIGH)
+            ledOn = not ledOn
+            time.sleep(0.5)
 
         input_state = GPIO.input(26)
         if input_state == False:
