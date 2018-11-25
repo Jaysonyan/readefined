@@ -13,18 +13,18 @@ def record():
     # camera.zoom = (0.25, 0.25, 0.5, 0.5)
     camera.start_preview()
     while True:
-        #time.sleep(2)
+        # time.sleep(2)
         camera.capture(imageStr)
         img = Image.open(imageStr)
         sizeX = img.size[0]
         sizeY = img.size[1]
         img = img.crop((0, sizeY / 4, sizeX, sizeY * 3 / 4))
-	img = img.rotate(180)
+        img = img.rotate(180)
         img.save(imageStr)
-	GPIO.output(21, GPIO.LOW)
+        GPIO.output(21, GPIO.LOW)
         os.system("python master.py")
-	GPIO.output(21, GPIO.HIGH)
-	time.sleep(1)
+        GPIO.output(21, GPIO.HIGH)
+        time.sleep(1)
         input_state = GPIO.input(26)
         if input_state == False:
             break
@@ -45,4 +45,3 @@ while True:
         break
 
 GPIO.cleanup()
-
