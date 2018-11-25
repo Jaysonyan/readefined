@@ -58,4 +58,4 @@ for words in wordsArr:
         midWord = word
 if flag:
     print midWord
-os.system("say " + midWord)
+    os.system("say " + midWord)
