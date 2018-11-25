@@ -1,10 +1,12 @@
+import os
+import time
 import RPi.GPIO as GPIO
+import threading
 from picamera import PiCamera
 from PIL import Image
-import time
-import os
-import threading
-imageStr = "image.jpg"
+
+
+imgStr = "image.jpg"
 
 class callMasterThread (threading.Thread):
    def __init__(self, threadID, name, counter):
@@ -40,14 +42,14 @@ def record():
 
     while True:
         # time.sleep(2)
-        camera.capture(imageStr)
-        img = Image.open(imageStr)
+        camera.capture(imgStr)
+        img = Image.open(imgStr)
         sizeX = img.size[0]
         sizeY = img.size[1]
         img = img.crop((sizeX / 4, sizeY / 4, sizeX * 3 / 4, sizeY * 3 / 4))
         img = img.rotate(180)
         img.save(imageStr)
-        
+
         master.start()
         led.start()
 
