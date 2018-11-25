@@ -12,16 +12,16 @@ centreY = image.size[1] / 2
 
 process = subprocess.Popen(
     ['gcloud', 'ml', 'vision', 'detect-text', imageStr], stdout=subprocess.PIPE)
-#process = subprocess.Popen(
+# process = subprocess.Popen(
 #     ['gcloud', 'ml', 'vision', 'detect-text', imageStr], stdout=subprocess.PIPE)
 
 wordsArr, err = process.communicate()
 try:
-	flag = True
-	wordsArr = json.loads(wordsArr)["responses"][0]["textAnnotations"][1:]
+    flag = True
+    wordsArr = json.loads(wordsArr)["responses"][0]["textAnnotations"][1:]
 except KeyError:
-	flag = False
-	print "No words"
+    flag = False
+    print "No words"
 #print wordsArr
 midWord = ""
 maxDist = 10000
@@ -40,14 +40,14 @@ def getCenter(vertices):
 
 def getDist(curCenter):
     val = math.sqrt((centreX - curCenter[0]) ** 2
-        + (centreY - curCenter[1]) ** 2)
+                    + (centreY - curCenter[1]) ** 2)
     print val
     return val
 
 
 for words in wordsArr:
     if not flag:
-	break
+        break
     word = words["description"]
     print words
     print ""
