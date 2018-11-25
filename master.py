@@ -16,7 +16,12 @@ process = subprocess.Popen(
 #     ['gcloud', 'ml', 'vision', 'detect-text', imageStr], stdout=subprocess.PIPE)
 
 wordsArr, err = process.communicate()
-wordsArr = json.loads(wordsArr)["responses"][0]["textAnnotations"][1:]
+try:
+	flag = True
+	wordsArr = json.loads(wordsArr)["responses"][0]["textAnnotations"][1:]
+except KeyError:
+	flag = False
+	print "No words"
 #print wordsArr
 midWord = ""
 maxDist = 10000
@@ -41,6 +46,8 @@ def getDist(curCenter):
 
 
 for words in wordsArr:
+    if not flag:
+	break
     word = words["description"]
     print words
     print ""
@@ -49,5 +56,6 @@ for words in wordsArr:
     if(curDist < maxDist):
         maxDist = curDist
         midWord = word
-print midWord
+if flag:
+    print midWord
 os.system("say " + midWord)
