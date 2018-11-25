@@ -56,12 +56,4 @@ for words in wordsArr:
         midWord = word
 if wordsDetected:
     print midWord
-    readFile = open("results.txt", "r")
-    lastWord = readFile.read()
-    readFile.close()
-    if lastWord != midWord:
-        os.system("say " + midWord)
-        writeFile = open("results.txt", "w")
-        writeFile.truncate(0)
-        writeFile.write(midWord)
-        writeFile.close()
+    os.system("say " + midWord)
