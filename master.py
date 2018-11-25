@@ -59,9 +59,9 @@ if wordsDetected:
     readFile = open("results.txt", "r")
     lastWord = readFile.read()
     readFile.close()
-    if lastWord not = midWord:
+    if lastWord != midWord:
         os.system("say " + midWord)
         writeFile = open("results.txt", "w")
         writeFile.truncate(0)
-        writeFile.write(midword)
+        writeFile.write(midWord)
         writeFile.close()
