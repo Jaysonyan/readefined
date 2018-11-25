@@ -21,7 +21,10 @@ def record():
         img = img.crop((sizeX / 4, sizeY / 4, sizeX * 3 / 4, sizeY * 3 / 4))
 	img = img.rotate(180)
         img.save(imageStr)
+	GPIO.output(21, GPIO.LOW)
         os.system("python master.py")
+	GPIO.output(21, GPIO.HIGH)
+	time.sleep(1)
         input_state = GPIO.input(26)
         if input_state == False:
             break
